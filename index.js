@@ -45,6 +45,13 @@ async function run() {
             const cursor = await taskCollection.find(query).toArray();
             res.send(cursor);
         })
+        // Delete to do task
+        app.delete('/task/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: ObjectId(id) };
+            const result = await taskCollection.deleteOne(filter);
+            res.send(result);
+        })
         // update Task
         app.put('/task/:id', async (req, res) => {
             const id = req.params.id;
