@@ -18,6 +18,7 @@ async function run() {
     try {
         await client.connect()
         const taskCollection = client.db("task-management").collection('tasks');
+        const completeCollection = client.db("task-management").collection('completes');
         console.log('database connected');
 
         // Post Task
@@ -25,6 +26,18 @@ async function run() {
             const task = req.body;
             const result = await taskCollection.insertOne(task);
             res.send(result);
+        })
+        //Post Complete task
+        app.post('/complete', async (req, res) => {
+            const complete = req.body;
+            const result = await completeCollection.insertOne(complete);
+            res.send(result);
+        })
+        // Get Complete Task
+        app.get('/Complete', async (req, res) => {
+            const query = {};
+            const cursor = await completeCollection.find(query).toArray();
+            res.send(cursor);
         })
         // Get Task
         app.get('/task', async (req, res) => {
