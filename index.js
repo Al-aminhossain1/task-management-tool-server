@@ -27,6 +27,12 @@ async function run() {
             const result = await taskCollection.insertOne(task);
             res.send(result);
         })
+        // // Post Task
+        // app.post('/task', async (req, res) => {
+        //     const task = req.body;
+        //     const result = await taskCollection.insertOne(task);
+        //     res.send(result);
+        // })
         //Post Complete task
         app.post('/complete', async (req, res) => {
             const complete = req.body;
